@@ -1,0 +1,77 @@
+<app-home *ngIf="!editable"></app-home>
+
+<div>
+<h1>{{ tournament.name }}</h1>
+
+<app-results-table [tournamentid]="tournament.id" *ngIf="!editable"></app-results-table>
+<p><strong>Дата старта:</strong> {{ tournament.startDate | date }}</p>
+<p><strong>Место проведения:</strong> {{ tournament.address }}</p>
+<div class="tournament-bracket__actions">
+  <button (click)="toggleEdit()" *ngIf="editable">{{ isEditing ? 'Закрыть редактирование' : 'Редактировать счета' }}</button>
+  </div>
+  <main id="tournament" class="container tournament-bracket">
+    <ng-container *ngFor="let round of tournamentBracket.rounds; let roundIndex = index">
+        <div class="tournament-bracket__round">
+            <h3 class="tournament-bracket__round-title">Round {{ roundIndex + 1 }}</h3>
+            <ul class="tournament-bracket__list">
+                <ng-container *ngFor="let match of round.matches">
+                    <li class="tournament-bracket__item">
+                        <div class="tournament-bracket__match" tabindex="0">
+                            <ng-container *ngIf="match; else loading">
+                                <ng-container *ngIf="!isEditing; else editTemplate">
+                                    <ng-container [ngTemplateOutlet]="readOnlyTemplate" [ngTemplateOutletContext]="{ $implicit: match }">
+                                    </ng-container>
+                                </ng-container>
+
+                                <ng-template #editTemplate>
+                                    <div class="tournament-bracket__team">
+                                        <span class="tournament-bracket__country">
+                                            {{ getParticipantName(match.top_participant_id) || 'TBD' }}
+                                        </span>
+                                        <input type="number" [(ngModel)]="match.top_score" [placeholder]="match.top_score || '0'" />
+                                    </div>
+                                    <div class="tournament-bracket__team">
+                                        <span class="tournament-bracket__country">
+                                            {{ getParticipantName(match.bottom_participant_id) || 'TBD' }}
+                                        </span>
+                                        <input type="number" [(ngModel)]="match.bottom_score" [placeholder]="match.bottom_score || '0'" />
+                                    </div>
+                                </ng-template>
+                            </ng-container>
+
+                            <ng-template #readOnlyTemplate let-match>
+                                <div class="tournament-bracket__content">
+                                    <div class="tournament-bracket__team"
+                                        [ngClass]="{'tournament-bracket__team--winner': isWinner(match?.top_participant_id, match?.winner_id)}">
+                                        <span class="tournament-bracket__country">
+                                            {{ getParticipantName(match?.top_participant_id) || 'TBD' }}
+                                        </span>
+                                        <span>{{ match?.top_score || '0'}}</span>
+                                    </div>
+                                    <div class="tournament-bracket__team"
+                                        [ngClass]="{'tournament-bracket__team--winner': isWinner(match?.bottom_participant_id, match?.winner_id)}">
+                                        <span class="tournament-bracket__country">
+                                            {{ getParticipantName(match?.bottom_participant_id) || 'TBD' }}
+                                        </span>
+                                        <span>{{ match?.bottom_score || '0'}}</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+
+                            <ng-template #loading>
+                                <div class="loading">Loading...</div>
+                            </ng-template>
+                        </div>
+                    </li>
+                    <li class="tournament-bracket__spacer">&nbsp;</li>
+                    <div class="tournament-bracket__actions">
+                        <button (click)="update(match)"
+                        [disabled]="!isMatchReadyToUpdate(match)"
+                        *ngIf="isEditing" class="btn">Обновить матч</button>
+                    </div>
+                </ng-container>
+            </ul>
+        </div>
+    </ng-container>
+</main>
+</div>

@@ -1,0 +1,853 @@
+ @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700&subset=latin-ext');
+ 
+ :root {
+   --breakpoint-xs: 24em;
+   --breakpoint-sm: 38em;
+   --breakpoint-md: 52em;
+   --breakpoint-lg: 72em;
+ }
+ 
+ *,
+ *::before,
+ *::after {
+   box-sizing: border-box;
+ }
+ main {
+  transform: scale(0.5); 
+  transform-origin: 0 0; 
+}
+ html {
+   font-size: 15px;
+ }
+ 
+ @media (min-width: 38em) {
+   html {
+     font-size: 14px;
+   }
+ }
+ 
+ @media (min-width: 52em) {
+   html {
+     font-size: 15px;
+   }
+ }
+ 
+ @media (min-width: 72em) {
+   html {
+     font-size: 16px;
+   }
+ }
+ 
+ body {
+   background-color: #f1f1f1;
+   font-family: 'Work Sans', 'Helvetica Neue', Arial, sans-serif;
+ }
+ 
+ .container {
+  
+   width: 150%;
+   height: 300%;
+   min-width: 18em;
+   margin: 20px auto;
+ }
+ 
+ h1, h2 { 
+   text-align: center;
+ }
+ 
+ h1 { 
+   font-size: 2rem;
+   font-weight: 700;
+   margin-bottom: 0.5em;
+ }
+ 
+ h2 { 
+   font-size: 1.4rem;
+   font-weight: 600;
+   margin-bottom: 2em;
+ }
+ 
+ .sr-only {
+   position: absolute;
+   width: 1px;
+   height: 1px;
+   padding: 0;
+   margin: -1px;
+   overflow: hidden;
+   clip: rect(0, 0, 0, 0);
+   border: 0;
+ }
+ 
+ .tournament-bracket {
+    
+   display: flex;
+   flex-direction: column;
+   align-items: center; 
+
+ }
+ 
+ @media (min-width: 38em) {
+   .tournament-bracket {
+     flex-direction: row;
+   }
+ }
+ 
+ .tournament-bracket__round {
+   display: block;
+   margin-left: -3px;
+   flex: 1;
+ }
+ 
+ .tournament-bracket__round-title {
+   color: #9e9e9e;
+   font-size: 0.95rem;
+   font-weight: 400;
+   text-align: start;
+   font-style: italic;
+   margin-bottom: 0.5em;
+ }
+ 
+ .tournament-bracket__list {
+   display: flex;
+   flex-direction: column;
+   flex-flow: row wrap;
+   flex-basis: auto;
+   justify-content: center;
+   height: 100%;
+   min-height: 100%;
+   border-bottom: 1px dashed #e5e5e5;
+   padding-bottom: 2em;
+   margin-bottom: 2em;
+   transition: padding 0.2s ease-in-out, margin 0.2s ease-in-out;
+ }        
+ 
+ @media (max-width: 24em) {
+   .tournament-bracket__list {
+     padding-bottom: 1em;
+     margin-bottom: 1em;
+   }
+ }
+ 
+ @media (min-width: 38em) {
+   .tournament-bracket__list {
+     margin-bottom: 0;
+     padding-bottom: 0;
+     border-right: 1px dashed #e5e5e5;
+     border-bottom: 0;
+   }
+ }
+ 
+ .tournament-bracket__round:last-child .tournament-bracket__list {
+   border: 0;
+ }
+ 
+ .tournament-bracket__item {
+   display: flex;
+   flex: 3 1 auto;
+   justify-content: center;
+   flex-direction: column;
+   align-items: flex-start;
+   position: relative;
+   padding: 2% 0;
+   width: 48%;
+   transition: padding 0.2s linear;
+ }
+ 
+ .tournament-bracket__item:nth-child(odd) {
+   margin-right: 2%;
+ }
+ 
+ .tournament-bracket__item:nth-child(even) {
+   margin-left: 2%;
+ }
+ 
+ @media (max-width: 24em) {
+   .tournament-bracket__item {
+     width: 100%;
+   }
+ 
+   .tournament-bracket__item:nth-child(odd),
+   .tournament-bracket__item:nth-child(even) {
+     margin-left: 0;
+     margin-right: 0;
+   }
+ }
+ 
+ @media (min-width: 38em) {
+   .tournament-bracket__item {
+     padding: 0.5em 1em;
+     width: 100%;
+   }
+ 
+   .tournament-bracket__item:nth-child(odd),
+   .tournament-bracket__item:nth-child(even) {
+     margin: 0;
+   }
+ 
+   .tournament-bracket__item::after {
+     position: absolute;
+     right: 0;
+     content: '';
+     display: block;
+     width: 1em;
+     height: 75%;
+     border-right: 2px solid #9e9e9e;
+   }
+ 
+   .tournament-bracket__item:nth-child(odd)::after {
+     top: 50%;
+     border-top: 2px solid #9e9e9e;
+     transform: translateY(-1px);
+   }
+ 
+   .tournament-bracket__item:nth-child(even)::after {
+     bottom: 50%;
+     border-bottom: 2px solid #9e9e9e;
+     transform: translateY(1px);
+   }
+ 
+   .tournament-bracket__round:first-child .tournament-bracket__item {
+     padding-left: 0;
+   }
+ 
+   .tournament-bracket__round:last-child .tournament-bracket__item {
+     padding-right: 0;
+   }
+ 
+   .tournament-bracket__round:last-child .tournament-bracket__item::after {
+     display: none;
+   }
+ 
+   .tournament-bracket__round:nth-last-child(2) .tournament-bracket__item::after {
+     border-radius: 0;
+     border-right: 0;
+   }
+ }
+ 
+ @media (min-width: 72em) {
+   .tournament-bracket__item {
+     padding: 0.5em 1.5em;
+   }
+ 
+   .tournament-bracket__item::after {
+     width: 1.5em;
+   }
+ }
+ 
+ .tournament-bracket__match {
+   display: block;
+   width: 100%;
+   background-color: #ffffff;
+   padding: 1em;
+   border: 1px solid transparent;
+   border-radius: 0.1em;
+   box-shadow: 0 2px 0 0 #e5e5e5;
+   outline: none;
+   cursor: pointer;
+   transition: padding 0.2s ease-in-out, border 0.2s linear;
+ }
+ 
+ .tournament-bracket__match:focus {
+   border-color: #2196F3;
+ }
+ 
+ @media (max-width: 24em) {
+   .tournament-bracket__match {
+     padding: 0.75em 0.5em;
+   }
+ }
+ 
+ @media (min-width: 38em) {
+   .tournament-bracket__match::before,
+   .tournament-bracket__match::after {
+     position: absolute;
+     left: 0;
+     z-index: 1;
+     content: '';
+     display: block;
+     width: 1em;
+     height: 10%;
+     border-left: 2px solid #9e9e9e;
+   }
+ 
+   .tournament-bracket__match::before {
+     bottom: 50%;
+     border-bottom: 2px solid #9e9e9e;
+     transform: translate(0, 1px);
+   }
+ 
+   .tournament-bracket__match::after {
+     top: 50%;
+     border-top: 2px solid #9e9e9e;
+     transform: translate(0, -1px);
+   }
+ }
+ 
+ @media (min-width: 72em) {
+   .tournament-bracket__match::before,
+   .tournament-bracket__match::after {
+     width: 1.5em;
+   }
+ 
+   .tournament-bracket__match::before {
+     transform: translate(0, 1px);
+   }
+ 
+   .tournament-bracket__match::after {
+     transform: translate(0, -1px);
+   }
+ }
+ 
+ .tournament-bracket__round:last-child .tournament-bracket__match::before,
+ .tournament-bracket__round:last-child .tournament-bracket__match::after {
+   border-left: 0;
+ }
+ 
+ .tournament-bracket__round:last-child .tournament-bracket__match::before {
+   border-bottom-left-radius: 0;
+ }
+ 
+ .tournament-bracket__round:last-child .tournament-bracket__match::after {
+   display: none;
+ }
+ 
+ .tournament-bracket__round:first-child .tournament-bracket__match::before,
+ .tournament-bracket__round:first-child .tournament-bracket__match::after {
+   display: none;
+ }
+ 
+ .tournament-bracket__content {
+   display: flex;
+ }
+ 
+ .tournament-bracket__content::after {
+   content: ':';
+   width: 1em;
+   text-align: center;
+   padding: 0.2em 0.1em;
+ }
+ 
+ @media (min-width: 38em) {
+   .tournament-bracket__content::after {
+     order: 1;
+   }
+ }
+ 
+ .tournament-bracket__content .tournament-bracket__team:first-child {
+   width: 100%;
+   order: 0;
+   text-align: right;
+ }
+ 
+ @media (min-width: 38em) and (max-width: 52em) {
+   .tournament-bracket__content .tournament-bracket__team:first-child {
+     align-items: flex-end;
+   }
+ }
+ 
+ .tournament-bracket__content .tournament-bracket__team:first-child .tournament-bracket__country {
+   order: 2;
+   justify-content: flex-end;
+ }
+ 
+ @media (min-width: 38em) {
+   .tournament-bracket__content .tournament-bracket__team:first-child .tournament-bracket__country {
+     order: 0;
+   }
+ }
+ 
+ @media (min-width: 38em) and (max-width: 52em) {
+   .tournament-bracket__content .tournament-bracket__team:first-child .tournament-bracket__country {
+     flex-direction: column-reverse;
+     align-items: flex-end;
+   }
+ }
+ 
+ .tournament-bracket__content .tournament-bracket__team:first-child .tournament-bracket__score {
+   order: 0;
+ }
+ 
+ @media (min-width: 52em) {
+   .tournament-bracket__content .tournament-bracket__team:first-child .tournament-bracket__score {
+     order: 2;
+   }
+ }
+ 
+ .tournament-bracket__content .tournament-bracket__team:last-child {
+   width: 50%;
+   order: 2;
+   text-align: left;
+ }
+ 
+ @media (min-width: 38em) and (max-width: 52em) {
+   .tournament-bracket__content .tournament-bracket__team:last-child {
+     align-items: flex-start;
+   }
+ }
+ 
+ .tournament-bracket__content .tournament-bracket__team:last-child .tournament-bracket__country {
+   justify-content: flex-start;
+ }
+ 
+ @media (min-width: 38em) and (max-width: 52em) {
+   .tournament-bracket__content .tournament-bracket__team:last-child .tournament-bracket__country {
+     align-items: flex-start;
+   }
+ }
+ 
+ .tournament-bracket__content .tournament-bracket__team .tournament-bracket__code {
+   order: 1;
+ }
+ 
+ .tournament-bracket__table {
+   width: 100%;
+ }
+ 
+ .tournament-bracket__caption {
+   font-size: 0.8rem;
+   color: #BDBDBD;
+   font-weight: 300;
+   padding-bottom: 0.75em;
+ }
+ 
+ .tournament-bracket__team {
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: space-between;
+ }
+ 
+ @media (min-width: 24em) {
+   .tournament-bracket__team {
+     flex-direction: column-reverse;
+   }
+ }
+ 
+ @media (min-width: 24em) {
+   .tournament-bracket__team {
+     flex-direction: column-reverse;
+   }
+ }
+ 
+ .tournament-bracket__country {
+   font-size: 0.95rem;
+   display: flex;
+   margin-top: 0.5em;
+   margin-bottom: 0.25em;
+   align-items: center;
+ }
+ 
+ @media (max-width: 24em) {
+   .tournament-bracket__country {
+     margin-top: 0;
+   }
+ }
+ 
+ @media (min-width: 38em) and (max-width: 52em) {
+   .tournament-bracket__country {
+     display: flex;
+     flex-direction: column;
+   }
+ 
+   .tournament-bracket__country .tournament-bracket__code {
+     margin-top: 0.5em;
+   }
+ }
+ 
+ .tournament-bracket__code {
+   padding: 0 0.5em;
+   color: #212121;
+   font-weight: 600;
+   text-transform: uppercase;
+   border: 0;
+   text-decoration: none;
+   cursor: help;
+   transition: padding 0.2s ease-in-out;
+ }
+ 
+ @media (max-width: 24em) {
+   .tournament-bracket__code {
+     padding: 0 0.25em;
+   }
+ }
+ 
+ @media (min-width: 38em) and (max-width: 52em) {
+   .tournament-bracket__code {
+     padding: 0;
+   }
+ }
+ 
+ .tournament-bracket__score {
+   display: block;
+   align-items: center;
+ }
+ 
+ .tournament-bracket__team:first-child .tournament-bracket__score {
+   flex-direction: row-reverse;
+   padding-left: 0.5em;
+ }
+ 
+ .tournament-bracket__team:last-child .tournament-bracket__score {
+   padding-right: 0.5em;
+ }
+ 
+ .tournament-bracket__number {
+   display: inline-block;
+   padding: 1em 0.5em 1em;
+   border-bottom: 0.075em solid transparent;
+   font-size: 0.95rem;
+   background-color: #F5F5F5;
+   border-color: #F5F5F5;
+ }
+ 
+ .tournament-bracket__team--winner .tournament-bracket__number {
+   background-color: #FFF176;
+   border-color: #FFF176;
+ }
+ 
+ .tournament-bracket__medal {
+   padding: 0 0.5em;
+ }
+ 
+ .tournament-bracket__medal--gold {
+   color: #FFD700;
+ }
+ 
+ .tournament-bracket__medal--silver {
+   color: #C0C0C0;
+ }
+ 
+ .tournament-bracket__medal--bronze {
+   color: #CD7F32;
+ 
+    order: hidden;
+  border: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.bracket {
+  font-size: 0.75em;
+}
+
+.bracket .round {
+  position: relative;
+  padding-left: 2em;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (min-width: 38em) {
+  .bracket .round {
+    padding-left: 4em;
+  }
+}
+
+.bracket .round ul {
+  display: block;
+  padding-top: 20px;
+}
+
+.bracket .round li {
+  height: 8em;
+  position: relative;
+  background-color: #fff;
+  margin-bottom: 20px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.bracket .round li:last-child {
+  margin-bottom: 0;
+}
+
+.bracket .round li span.name {
+  display: block;
+  font-weight: 600;
+}
+
+.bracket .round li span.score {
+  display: block;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.bracket .round li span.score span {
+  display: block;
+  font-size: 0.75em;
+  font-weight: 300;
+}
+
+.bracket .round li .connector {
+  position: absolute;
+  right: -2em;
+  top: 50%;
+  width: 2em;
+  height: 0;
+  border-top: 1px solid #ccc;
+}
+
+.bracket .round li:first-child .connector {
+  top: 75%;
+}
+
+.bracket .round li:last-child .connector {
+  top: 25%;
+}
+
+@media (min-width: 38em) {
+  .bracket .round li .connector {
+    right: -4em;
+    width: 4em;
+  }
+}
+
+.bracket .round li .connector::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 100%;
+  width: 1em;
+  height: 0;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0 0 2px 2px;
+}
+
+.bracket .round li:first-child .connector::after,
+.bracket .round li:last-child .connector::after {
+  top: 0;
+  border-radius: 2px 2px 0 0;
+}
+
+.hidden .bracket .round li .connector,
+.hidden .bracket .round li .connector::after {
+  border-color: #f1f1f1;
+}
+
+.bracket .round-title {
+  font-size: 1.2em;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 38em) {
+  .bracket .round-title {
+    font-size: 1.5em;
+  }
+}
+
+.bracket .champion {
+  font-size: 1.25em;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media (min-width: 38em) {
+  .bracket .champion {
+    font-size: 1.5em;
+  }
+}
+
+
+#tournament {
+  padding: 20px; 
+  background-color: #fff; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+
+h1 {
+  font-size: 2rem; 
+  font-weight: 700; 
+  color: #333; 
+  margin-bottom: 10px; 
+}
+
+
+p {
+  font-size: 1rem; 
+  color: #666; 
+  margin-bottom: 20px; 
+}
+
+
+.invite-on-tournament {
+  margin-bottom: 20px; 
+}
+
+
+.btn {
+  background-color: #2196F3; 
+  color: white; 
+  padding: 10px 15px; 
+  border: none; 
+  border-radius: 5px; 
+  font-size: 16px; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+}
+
+.btn:hover {
+  background-color: #1976D2; 
+}
+
+.btn:focus {
+  outline: none; 
+}
+
+
+.tournament-bracket__round-title {
+  font-size: 1.5rem; 
+  font-weight: 600; 
+  margin: 20px 0; 
+  text-align: center; 
+}
+
+
+/* .tournament-bracket__list {
+  list-style-type: none; Убираем маркеры списка
+  padding: 0; Убираем внутренние отступы
+} */
+
+
+.tournament-bracket__item {
+  margin-bottom: 15px; 
+}
+
+
+.tournament-bracket__spacer {
+  height: 20px; 
+}
+
+
+.tournament-bracket__content {
+  display: flex;
+  justify-content: space-between; 
+  width: 100%; 
+}
+
+
+.tournament-bracket__team {
+  flex: 1; 
+  text-align: center; 
+}
+
+
+.tournament-bracket__country {
+  font-weight: 500; 
+}
+
+
+.tournament-bracket__score {
+  font-weight: bold; 
+  text-align: center;
+}
+
+
+.tournament-bracket__actions {
+  text-align: center; 
+  margin-top: 10px; 
+}
+
+
+.loading {
+  text-align: center; 
+  color: #999; 
+}
+
+
+#tournament {
+  padding: 20px; 
+  background-color: #fff; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  margin: 20px auto; 
+  max-width: 90%; 
+}
+
+
+h1 {
+  font-size: 2rem; 
+  font-weight: 700; 
+  color: #333; 
+  margin-bottom: 10px; 
+  text-align: center; 
+}
+
+
+.tournament-bracket__round-title {
+  font-size: 1.5rem; 
+  font-weight: 600; 
+  margin: 20px 0; 
+  text-align: center; 
+}
+
+
+.tournament-bracket__list {
+  list-style-type: none; 
+  padding: 0; 
+  margin: 10px 0; 
+}
+
+
+.tournament-bracket__item {
+  margin-bottom: 15px; 
+}
+
+
+.tournament-bracket__spacer {
+  height: 20px; 
+}
+
+
+.tournament-bracket__content {
+  display: flex;
+  justify-content: space-between; 
+  width: 100%; 
+}
+
+
+.tournament-bracket__team {
+  flex: 1; 
+  text-align: center; 
+}
+
+
+.tournament-bracket__country {
+  font-weight: 500; 
+}
+
+
+.tournament-bracket__score {
+  font-weight: bold; 
+  text-align: center; 
+}
+
+
+.btn {
+  background-color: #2196F3; 
+  color: white; 
+  padding: 10px 15px; 
+  border: none; 
+  border-radius: 5px; 
+  font-size: 16px; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+}
+
+
+.btn:hover {
+  background-color: #1976D2; 
+}
+
+
+.loading {
+  text-align: center; 
+  color: #999; 
+}

@@ -1,0 +1,46 @@
+<app-home></app-home>
+
+<div *ngIf="user" class="profile-container">
+  <div class="user-info">
+    <h2 class="profile-title">Профиль пользователя: {{ user.username }}</h2>
+    <p>Email: {{ user.e_mail }}</p>
+    <button class="btn edit-btn" (click)="isEditing = true">Редактировать</button>
+  </div>
+
+  <div *ngIf="isEditing" class="editing-section">
+    <h2>Редактировать Профиль</h2>
+    <button class="btn edit-btn" (click)="changePassword()">Хотите поменять пароль?</button>
+    <form [formGroup]="form" (ngSubmit)="editUser()" class="form">
+      <label for="username">Имя пользователя:</label>
+      <input class="form-control" type="text" formControlName="username" required />
+
+      <label for="e_mail">Почта:</label>
+      <input class="form-control" type="email" formControlName="e_mail" required />
+
+      <div *ngIf="chngPassword">
+        <label for="password">Пароль:</label>
+        <input class="form-control" type="password" formControlName="password" />
+      </div>
+      <button type="submit" class="btn update-btn">Обновить</button>
+      <button type="button" (click)="cancelEdit()" class="btn cancel-btn">Отмена</button>
+    </form>
+  </div>
+
+  <button class="btn delete-btn" (click)="showConfirmDelete = true">Удалить аккаунт</button>
+
+  <div *ngIf="showConfirmDelete" class="confirmation">
+    <p>Вы уверены, что хотите удалить аккаунт?</p>
+    <button class="btn confirm-btn" (click)="deleteUser()">Да</button>
+    <button class="btn cancel-btn" (click)="showConfirmDelete = false">Нет</button>
+  </div>
+
+  <div class="modal-content" (click)="$event.stopPropagation()" *ngIf="fighterId">
+    <app-fighter [fighterID]="fighterId"></app-fighter>
+  </div>
+  <div class="modal-content" (click)="$event.stopPropagation()" *ngIf="clubId">
+    <app-club-profile [clubId]="clubId"></app-club-profile>
+  </div>
+  <div class="modal-content" (click)="$event.stopPropagation()" *ngIf="organazerId">
+    <app-organazer-profile [organazerID]="organazerId"></app-organazer-profile>
+  </div>
+</div>

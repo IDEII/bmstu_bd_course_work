@@ -1,0 +1,10 @@
+<app-home></app-home>
+
+<h2>Список Турниров</h2>
+<ul>
+    @for (tournament of tournaments; track tournament) {
+  <li>
+    <a [routerLink]="['/tournament', tournament.id]">{{ tournament.name }}</a>
+  </li>
+}
+</ul>

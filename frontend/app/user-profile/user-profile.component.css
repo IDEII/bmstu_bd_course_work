@@ -1,0 +1,74 @@
+
+.profile-container {
+    max-width: auto; 
+    margin: 0 auto; 
+    padding: 20px; 
+    background-color: #f9f9f9; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+  }
+  
+  
+  .user-info {
+    margin-bottom: 20px; 
+  }
+  
+  
+  .profile-title {
+    color: #007bff; 
+  }
+  
+  
+  .btn {
+    padding: 10px 15px; 
+    margin: 5px 0; 
+    border: none; 
+    border-radius: 4px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+  }
+  
+  
+  .edit-btn {
+    background-color: #28a745; 
+    color: #fff; 
+  }
+  
+  .delete-btn {
+    background-color: #dc3545; 
+    color: #fff; 
+  }
+  
+  .update-btn {
+    background-color: #007bff; 
+    color: #fff; 
+  }
+  
+  .cancel-btn {
+    background-color: #6c757d; 
+    color: #fff; 
+  }
+  
+  
+  .btn:hover {
+    filter: brightness(90%); 
+  }
+  
+  
+  .editing-section {
+    margin-top: 20px; 
+    padding: 15px; 
+    background-color: #e9ecef; 
+    border-radius: 8px; 
+  }
+  
+  
+  .confirmation {
+    margin-top: 20px; 
+    padding: 15px; 
+    background-color: #ffeeba; 
+    border: 1px solid #ffd633; 
+    border-radius: 5px; 
+  }
+  
