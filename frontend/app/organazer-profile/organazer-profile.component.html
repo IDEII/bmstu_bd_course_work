@@ -1,0 +1,108 @@
+<app-home *ngIf="!organazerID"></app-home>
+
+<div class="organizer-container">
+    <h2 class="organizer-title">{{ organazer.title }}</h2>
+    
+    <div *ngIf="!isEditing" class="organizer-details">
+        <p><strong>Описание:</strong> {{ organazer.description }}</p>
+        <p><strong>Адрес:</strong> {{ organazer.address }}</p>
+        <p><strong>Контакт:</strong> {{ organazer.contact }}</p>
+        <p><strong>Дата основания:</strong> {{ organazer.founded_date | date: 'longDate' }}</p>
+
+        <button class="btn edit-btn" *ngIf="editable" (click)="isEditing = true">Редактировать</button>
+
+        <button class="btn delete-btn" *ngIf="editable" (click)="showConfirmDelete = true">Удалить Организатора</button>
+
+        <div *ngIf="showConfirmDelete && editable" class="confirmation">
+            <p>Вы уверены, что хотите удалить этого организатора?</p>
+            <button class="btn confirm-btn" (click)="delOrganazer()">Да</button>
+            <button class="btn cancel-btn" (click)="showConfirmDelete = false">Нет</button>
+        </div>
+    </div>
+    <div class="organizer-details" *ngIf="editable">
+    <button (click)="showManage()" class="btn confirm-btn" *ngIf="!showMng">Менеджер Заявок</button>
+    <button (click)="showManage()" class="btn cancel-btn" *ngIf="showMng">Скрыть</button>
+    <div *ngIf="showMng && editable">
+    <app-request-manager [organazer_id]="org_id"></app-request-manager>
+    </div>
+    </div>
+    <div *ngIf="isEditing && editable" class="editing-section">
+        <h2>Редактировать Организатора</h2>
+        <form [formGroup]="form" (ngSubmit)="updOrganazer()" class="organizer-form">
+            <label for="title">Название Организатора:</label>
+            <input class="form-control" type="text" formControlName="title" required />
+
+            <label for="description">Описание:</label>
+            <input class="form-control" type="text" formControlName="description" required />
+
+            <label for="address">Адрес:</label>
+            <input class="form-control" type="text" formControlName="address" required />
+
+            <label for="contact">Контакты:</label>
+            <input class="form-control" type="text" formControlName="contact" required />
+
+            <button type="submit" class="btn update-btn">Обновить</button>
+            <button (click)="cancelEdit()" class="btn cancel-btn">Отмена</button>
+        </form>
+    </div>
+
+    <div *ngIf="!isEditing && editable" class="tournament-section">
+        <button class="btn create-btn" (click)="showCreate()" *ngIf="!showCrt">Новый Турнир</button>
+        <button class="btn hide-btn" (click)="showCreate()" *ngIf="showCrt">Скрыть</button>
+
+        <div *ngIf="showCrt" class="create-tournament">
+            <app-create-tournament [organazer_id]="organazer.id" *ngIf="!isEditingTournament && !showTournament"></app-create-tournament>
+        </div>
+
+        <label for="tournamentSelect" class="tournament-label">Выберите Турнир:</label>
+        <select id="tournamentSelect" class="tournament-select" [(ngModel)]="selectedTournamentId">
+            <option *ngFor="let tournament of tournaments" [value]="tournament.id">
+                {{ tournament.name }}
+            </option>
+        </select>
+
+        <div *ngIf="selectedTournamentId !== null" class="tournament-actions">
+            <button class="btn conduct-btn" (click)="conductTournament(selectedTournamentId)">Провести турнир</button>
+            <button class="btn edit-tournament-btn" (click)="editingTournament(selectedTournamentId)">Редактировать турнир</button>
+            <button class="btn delete-tournament-btn" (click)="showConfirmDelete = true">Удалить турнир</button>
+            <button class="btn invite-btn" (click)="showInvite(selectedTournamentId)" *ngIf="!showInv">Пригласить участников</button>
+            <button class="btn hide-invite-btn" (click)="showInvite(selectedTournamentId)" *ngIf="showInv">Скрыть</button>
+            <app-invate-on-tournament [tournamentid]="selectedTournamentId" *ngIf="showInv"></app-invate-on-tournament>
+
+            <button class="btn edit-score-btn" (click)="showTour(selectedTournamentId)" *ngIf="!showTournament">Редактировать счет</button>
+            <button class="btn hide-score-btn" (click)="showTour(selectedTournamentId)" *ngIf="showTournament">Скрыть</button>
+
+            <div *ngIf="showTournament && editable">
+                <app-tournament [tournamentID]="inputId" *ngIf="inputId"></app-tournament>
+            </div>
+
+            <div *ngIf="editingTournamentId === selectedTournamentId">
+                <h2>Редактировать Турнир</h2>
+                <form [formGroup]="formTournament" (ngSubmit)="updTournament(selectedTournamentId, tournament.rounds, tournament.category)" class="tournament-form">
+                    <label for="name">Новое название Турнир:</label>
+                    <input class="form-control" type="text" formControlName="name" required />
+
+                    <label for="address">Новое место проведения турнира:</label>
+                    <input class="form-control" type="text" formControlName="address" required />
+
+                    <label for="startDate">Начало:</label>
+                    <input class="form-control" type="date" formControlName="startDate" required />
+
+                    <label for="endDate">Конец:</label>
+                    <input class="form-control" type="date" formControlName="endDate" required />
+
+                    <button type="submit" class="btn update-tournament-btn">Обновить</button>
+                    <button (click)="cancelEditTournament()" class="btn cancel-tournament-btn">Отмена</button>
+                </form>
+            </div>
+
+            <div *ngIf="showConfirmDelete" class="confirmation">
+                <p>Вы уверены, что хотите удалить турнир?</p>
+                <button class="btn confirm-btn" (click)="delTournament(selectedTournamentId)">Да</button>
+                <button class="btn cancel-btn" (click)="showConfirmDelete = false">Нет</button>
+            </div>
+
+            <app-draw *ngIf="selectedTournamentId" [tournamentId]="selectedTournamentId"></app-draw>
+        </div>
+    </div>
+</div>

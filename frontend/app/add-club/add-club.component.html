@@ -1,0 +1,27 @@
+<app-home></app-home>
+
+<div>
+<h2>Добавить клуб</h2>
+<form [formGroup]="form" (ngSubmit)="addClub()">
+  <label for="title">Название клуба:</label>
+  <input class="form-control" type="text" formControlName="title" required />
+  
+  <label for="description">Описание:</label>
+  <input class="form-control" type="text" formControlName="description" required />
+  
+  <label for="rating">Рейтинг:</label>
+  <input class="form-control" type="text" formControlName="rating" required />
+  
+  <label for="address">Адрес:</label>
+  <input class="form-control" type="text" formControlName="address" required />
+  
+  <label for="contact">Контакты:</label>
+  <input class="form-control" type="text" formControlName="contact" required />
+  
+  <label for="founded_date">Дата основания:</label>
+  <input class="form-control" type="date" formControlName="founded_date" required />
+  
+  <button type="submit">Добавить</button>
+</form>
+
+</div>

@@ -1,0 +1,55 @@
+<app-home *ngIf="!fighterID"></app-home>
+<div>
+<h1>Профиль бойца</h1>
+<button (click)="showConfirmDelete = true" *ngIf="editable">Удалить бойца</button>
+
+<div *ngIf="showConfirmDelete && editable">
+  <p>Вы уверены, что хотите удалить бойца?</p>
+  <button (click)="delFighter()">Да</button>
+  <button (click)="showConfirmDelete = false">Нет</button>
+</div>
+
+<div>
+  <h2>{{ fighter.name }}</h2>
+  <p>Клуб ID: {{ fighter.club_id }}</p>
+  <p>Боец ID: {{ fighter.id }}</p>
+  <p>Описание: {{ fighter.description }}</p>
+  <p>Страна: {{ fighter.country }}</p>
+  <p>Дата рождения: {{ fighter.birthday | date }}</p>
+  <p>Рейтинг: {{ fighter.rating }}</p>
+  <p>Категория: {{ fighter.category }}</p>
+
+  <div *ngIf="!isEditing && editable">
+    <button (click)="isEditing = true">Редактировать</button>
+  </div>
+
+  <div *ngIf="isEditing && editable">
+    <h2>Редактировать бойца</h2>
+    <form [formGroup]="form" (ngSubmit)="updFighter()">
+      <label for="name">Имя:</label>
+      <input class="form-control" type="text" formControlName="name" required />
+  
+      <label for="description">Описание:</label>
+      <input class="form-control" type="text" formControlName="description" required />
+  
+      <label for="rating">Рейтинг:</label>
+      <input class="form-control" type="text" formControlName="rating" required />
+
+      <label for="country">Страна:</label>
+      <input class="form-control" type="text" formControlName="country" required />
+
+      <label for="birthday">Дата рождения:</label>
+      <input class="form-control" type="date" formControlName="birthday" required />
+
+      <label for="category">Категория:</label>
+      <input class="form-control" type="text" formControlName="category" required />
+
+      <button type="submit">Обновить</button>
+      <button (click)="cancelEdit()">Отмена</button>
+    </form>
+  </div>
+
+    <app-request-on-tournament *ngIf="editable" [fighterid]="fighter.id" [category]="fighter.category"></app-request-on-tournament>
+
+</div>
+</div>

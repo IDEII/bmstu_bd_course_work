@@ -1,0 +1,9 @@
+<app-home></app-home>
+<h2>Список Организаторов</h2>
+<ul>
+    @for (organazer of organazers; track organazer) {
+  <li>
+    <a [routerLink]="['/organazer-profile', organazer.id]">{{ organazer.title }}</a>
+  </li>
+}
+</ul>

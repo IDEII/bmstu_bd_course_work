@@ -1,0 +1,23 @@
+<app-home></app-home>
+
+<div>
+<h2>Добавить Организатора</h2>
+<form [formGroup]="form" (ngSubmit)="addOrganazer()">
+    <label for="title">Имя Организатора:</label>
+    <input id="title" formControlName="title" required />
+
+    <label for="description">Описание:</label>
+    <input id="description" formControlName="description" required />
+  
+    <label for="address">Адрес:</label>
+    <input id="address" formControlName="address" required />
+  
+    <label for="contact">Контакт:</label>
+    <input id="contact" formControlName="contact" required />
+  
+    <label for="founded_date">Дата основания:</label>
+    <input id="founded_date" type="date" formControlName="founded_date" required />
+  
+  <button type="submit">Добавить</button>
+</form>
+</div>

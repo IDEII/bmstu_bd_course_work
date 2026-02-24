@@ -1,0 +1,29 @@
+<div>
+  <button (click)="isInvite = true" [disabled]="isInvite">Пригласить Бойца</button>
+  <button (click)="isInvite = false" (click)="loadInvites()" [disabled]="!isInvite">Удалить Приглашение</button>
+</div>
+
+<div class="invite-on-tournament" *ngIf="isInvite">
+  <form [formGroup]="inviteForm" (ngSubmit)="inviteFighter()">
+    <div class="form-group">
+      <label for="selectedFighter">Пригласить Бойца</label>
+      <select id="selectedFighter" formControlName="selectedFighter" class="form-control">
+        <option *ngFor="let fighter of fighters" [value]="fighter.id">{{ fighter.name }}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Пригласить бойца</button>
+  </form>
+</div>
+
+<div class="delete-invite" *ngIf="!isInvite">
+  <form [formGroup]="deleteForm" (ngSubmit)="deleteInvite()">
+    <div class="form-delete-group">
+      <label for="selectedInvite">Удалить Приглашение</label>
+      <select id="selectedInvite" formControlName="selectedInvite" class="form-delete-control">
+        <option *ngFor="let invite of invites" [value]="invite.fighter_id">{{ getFighterName(invite.fighter_id) }}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Удалить приглашение</button>
+  </form>
+</div>
+

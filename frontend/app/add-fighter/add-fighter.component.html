@@ -1,0 +1,26 @@
+<app-home></app-home>
+
+<div>
+<h2>Добавить бойца</h2>
+<form [formGroup]="form" (ngSubmit)="addFighter()">
+  <label for="name">Имя бойца:</label>
+  <input class="form-control" type="text" formControlName="name" required />
+
+  <label for="description">Описание:</label>
+  <input class="form-control" type="text" formControlName="description" required />
+  
+  <label for="country">Национальность:</label>
+  <input class="form-control" type="text" formControlName="country" required />
+  
+  <label for="rating">Рейтинг:</label>
+  <input class="form-control" type="text" formControlName="rating" required />
+
+  <label for="category">Категория:</label>
+  <input class="form-control" type="number" formControlName="category" required />
+  
+  <label for="birthday">День рождения:</label>
+  <input class="form-control" type="date" formControlName="birthday" required />
+  
+  <button type="submit">Добавить</button>
+</form>
+</div>

@@ -1,0 +1,14 @@
+<div>
+    <h2>Турнирная жеребьевка</h2>
+    <form (ngSubmit)="onDraw()">
+      <div>
+        <input type="text" id="tournamentId" [(ngModel)]="tournamentId" [hidden]="true" name="tournamentId" required>
+      </div>
+      <button type="submit">Начать жеребьевку</button>
+    </form>
+  </div>
+  <div>
+    <h4>Участники турнира</h4>
+        <tr *ngFor="let participant of participants">
+          <td>{{ participant.name }}</td>
+  </div>

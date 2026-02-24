@@ -1,0 +1,22 @@
+<h2>Создать Турнир</h2>
+<form [formGroup]="form" (ngSubmit)="addTournament()">
+  <label for="name">Название Турнира:</label>
+  <input id="name" class="form-control" formControlName="name" required />
+
+  <label for="address">Место проведения турнира:</label>
+  <input id="address" class="form-control" formControlName="address" required />
+
+  <label for="startDate">Дата начала:</label>
+  <input id="startDate" class="form-control" type="date" formControlName="startDate" required />
+
+  <label for="endDate">Дата окончания:</label>
+  <input id="endDate" class="form-control" type="date" formControlName="endDate" required />
+
+  <label for="rounds">Количество раундов в турнире:</label>
+  <input id="rounds" class="form-control" type="number" formControlName="rounds" required />
+
+  <label for="category">Весовая категория турнира:</label>
+  <input id="category" class="form-control" type="number" formControlName="category" required />
+
+  <button type="submit">Добавить</button>
+</form>

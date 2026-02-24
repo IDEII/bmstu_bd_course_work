@@ -1,0 +1,69 @@
+<app-home *ngIf="!clubId"></app-home>
+
+<div>
+  <h2>{{ club.title }}</h2>
+  <div *ngIf="!isEditing">
+    <p><strong>Описание:</strong> {{ club.description }}</p>
+    <p><strong>Адрес:</strong> {{ club.address }}</p>
+    <p><strong>Контакт:</strong> {{ club.contact }}</p>
+    <p><strong>Дата основания:</strong> {{ club.founded_date | date }}</p>
+    
+    <button (click)="isEditing = true" *ngIf="editable">Редактировать</button>
+
+    <button (click)="showConfirmDelete = true" *ngIf="editable">Удалить клуб</button>
+
+    <div *ngIf="showConfirmDelete && editable">
+      <p>Вы уверены, что хотите удалить этот клуб?</p>
+      <button (click)="deleteClub()">Да</button>
+      <button (click)="showConfirmDelete = false">Нет</button>
+    </div>
+
+    <div>
+      <button (click)="showAddMember = true" *ngIf="editable">Добавить участника клуба</button>
+    
+        <div *ngIf="showAddMember && editable">
+          <h3>Добавить участника</h3>
+          <select [(ngModel)]="selectedFighterId">
+            <option *ngFor="let fighter of fighters" [value]="fighter.id">{{ fighter.name }}</option>
+          </select>
+          <button (click)="addMember()">Добавить</button>
+          <button (click)="showAddMember = false">Отмена</button>
+        </div>
+    
+      </div>
+
+    <div>
+      <div *ngFor="let member of members" class="members-list">
+        <li class="member-item">
+          <a>{{ member.name }}</a>
+          <button (click)="kickMember(member.id)" *ngIf="editable">Исключить</button>
+        </li>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="isEditing && editable">
+    <h2>Редактировать клуб</h2>
+    <form [formGroup]="form" (ngSubmit)="updClub()">
+      <label for="title">Название клуба:</label>
+      <input class="form-control" type="text" formControlName="title" required />
+  
+      <label for="description">Описание:</label>
+      <input class="form-control" type="text" formControlName="description" required />
+  
+      <label for="rating">Рейтинг:</label>
+      <input class="form-control" type="text" formControlName="rating" required />
+
+      <label for="address">Адрес:</label>
+      <input class="form-control" type="text" formControlName="address" required />
+
+      <label for="contact">Контакты:</label>
+      <input class="form-control" type="text" formControlName="contact" required />
+
+      <button type="submit">Обновить</button>
+      <button (click)="cancelEdit()">Отмена</button>
+    </form>
+  </div>
+</div>

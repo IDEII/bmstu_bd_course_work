@@ -1,0 +1,60 @@
+<div class="login-form" *ngIf="is_visible">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Username</label>
+      <input
+        type="text"
+        formControlName="username"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+      />
+      @if (submitted && f['username'].errors) {
+      <div class="invalid-feedback">
+        @if (f['username'].errors['required']) {
+        <div>Username is required</div>
+        }
+		@if (f['username'].errors['minlength']) {
+        <div>Wrong Username</div>
+        }
+		@if (f['username'].errors['maxlength']) {
+        <div>Wrong Username</div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+      />
+      @if (submitted && f['password'].errors) {
+      <div class="invalid-feedback">
+        @if (f['password'].errors['required']) {
+        <div>Password is required</div>
+        }
+		@if (f['password'].errors['minlength']) {
+        <div>Wrong Password</div>
+        }
+		@if (f['password'].errors['maxlength']) {
+        <div>Wrong Password</div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Login</button>
+      <button
+        type="button"
+        (click)="onReset()"
+        class="btn btn-warning float-right"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>

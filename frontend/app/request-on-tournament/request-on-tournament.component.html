@@ -1,0 +1,22 @@
+<div>
+    <h2>Подача заявки на турнир</h2>
+    <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+        <label for="tournament">Выберите турнир:</label>
+        <select id="tournament" formControlName="selectedTournament">
+            <option *ngFor="let tournament of tournaments" [value]="tournament.id">
+                {{ tournament.name }} (Категория: {{ tournament.category }})
+            </option>
+        </select>
+        <button type="submit">Отправить</button>
+    </form>
+
+    <h2>Список отправленных заявок</h2>
+    <label for="requests">Выберите заявку для удаления:</label>
+    <ul id="requests">
+        <li *ngFor="let request of fighterRequests">
+            <input type="radio" name="request" [(ngModel)]="selectedRequestId" [value]="request.request_id">
+            {{ request.name }} (Решение: {{ request.decision === 1 ? 'accepted' : 'rejected' }})
+        </li>
+    </ul>
+    <button (click)="deleteRequest()">Удалить заявку</button>
+</div>

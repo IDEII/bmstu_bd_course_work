@@ -1,0 +1,16 @@
+<app-home></app-home>
+
+<h2>Список клубов</h2>
+<p>{{ statusMessage }}</p>
+<ul>
+  @for (club of clubs; track club) {
+  <li>
+    <a [routerLink]="['/club-profile', club.id]">{{ club?.title }}</a>
+  </li>
+}
+</ul>
+
+
+<div *ngIf="clubs.length === 0 && !statusMessage">
+  <p>Нет доступных клубов.</p>
+</div>

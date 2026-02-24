@@ -1,0 +1,50 @@
+
+div {
+  margin: 20px; 
+  padding: 20px; 
+  background-color: #f8f9fa; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+
+.errorMessage {
+  color: red; 
+  font-weight: bold; 
+  margin-bottom: 15px; 
+}
+
+
+table {
+  width: 100%; 
+  border-collapse: collapse; 
+  margin-top: 10px; 
+}
+
+
+thead {
+  background-color: #007bff; 
+  color: white; 
+}
+
+th {
+  padding: 12px; 
+  text-align: left; 
+}
+
+
+td {
+  padding: 10px; 
+  border: 1px solid #dee2e6; 
+}
+
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2; 
+}
+
+
+tbody tr:hover {
+  background-color: #e9ecef; 
+  cursor: pointer; 
+}

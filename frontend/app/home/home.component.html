@@ -1,0 +1,36 @@
+<div class="navigation-container">
+  <nav class="navbar">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a routerLink="/add_club" class="nav-link" *ngIf="_isLoggedIn && user.linked_id_2 === ''">Стать основателем клуба</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/add_organazer" class="nav-link" *ngIf="_isLoggedIn && user.linked_id_1 === ''">Стать организатором</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/add_fighter" class="nav-link" *ngIf="_isLoggedIn && user.linked_id_3 === ''">Стать Бойцом</a>
+      </li>
+      <li class="nav-item"><a routerLink="/tournaments" class="nav-link">Просмотр турниров</a></li>
+      <li class="nav-item"><a routerLink="/clubs" class="nav-link">Список всех клубов</a></li>
+      <li class="nav-item"><a routerLink="/fighters" class="nav-link">Список всех бойцов</a></li>
+      <li class="nav-item"><a routerLink="/organazers" class="nav-link" *ngIf="_isLoggedIn">Список всех организаторов</a></li>
+      <li class="nav-item"><a (click)="navigate()" class="nav-link" *ngIf="_isLoggedIn">Профиль</a></li>
+      <li class="nav-item"><a (click)="logout()" class="nav-link" *ngIf="_isLoggedIn">Выход</a></li>
+      <li class="nav-item"><a (click)="showLoginModal()" class="nav-link" *ngIf="!_isLoggedIn">Вход</a></li>
+      <li class="nav-item"><a (click)="showRegisterModal()" class="nav-link" *ngIf="!_isLoggedIn">Регистрация</a></li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
+
+  <div class="modal" *ngIf="showLogin && !is_visible2" (click)="closeLoginModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <app-login (loginComplete)="onLoginComplete()"></app-login>
+    </div>
+  </div>
+
+  <div class="modal" *ngIf="showRegister && !is_visible" (click)="closeRegisterModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <app-registration (registrationComplete)="onRegistrationComplete()"></app-registration>
+    </div>
+  </div>
+</div>

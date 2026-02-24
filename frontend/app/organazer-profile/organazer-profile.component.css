@@ -1,0 +1,182 @@
+
+div {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+
+h2 {
+    color: #007bff;
+}
+
+
+button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+form {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+input[type="text"], input[type="date"], select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+input[type="text"]:focus, input[type="date"]:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+
+p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #495057;
+}
+
+.confirmation {
+    background-color: #ffeeba;
+    border: 1px solid #ffeeba;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+
+label[for="tournamentSelect"] {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+select {
+    margin-bottom: 20px;
+}
+
+
+.app-create-tournament {
+    margin-top: 20px;
+}
+
+.app-request-manager {
+    margin-top: 20px;
+}
+
+
+.organizer-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+
+.organizer-title {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+
+.organizer-details {
+    margin-bottom: 20px;
+}
+
+
+.btn {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+
+.confirmation {
+    background-color: #ffeeba;
+    border: 1px solid #ffeeba;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+
+.editing-section {
+    margin-top: 20px;
+}
+
+
+.organizer-form,
+.tournament-form {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+
+.form-control, 
+.tournament-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.form-control:focus, 
+.tournament-select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+
+.tournament-section {
+    margin-top: 20px;
+}
+
+.tournament-label {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+
+.tournament-actions {
+    margin-top: 20px;
+}

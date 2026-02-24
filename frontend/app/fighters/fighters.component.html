@@ -1,0 +1,9 @@
+<app-home></app-home>
+<h2>Список Бойцов</h2>
+<ul>
+    @for (fighter of fighters; track $index) {
+  <li>
+    <a [routerLink]="['/fighter', fighter.id]">{{ fighter.name }}</a>
+  </li>
+}
+</ul>

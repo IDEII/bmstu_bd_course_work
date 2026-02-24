@@ -1,0 +1,41 @@
+<div class="register-form">
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="username">Имя пользователя:</label>
+    <input id="username" formControlName="username" />
+    <div *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched"> 
+      <small *ngIf="registrationForm.get('username')?.errors?.required">Это поле обязательно.</small>
+      <small *ngIf="registrationForm.get('username')?.errors?.minlength">Минимальная длина - 3 символа.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="e_mail">Электронная почта:</label>
+    <input id="e_mail" formControlName="e_mail" />
+    <div *ngIf="registrationForm.get('e_mail')?.invalid && registrationForm.get('e_mail')?.touched"> 
+      <small *ngIf="registrationForm.get('e_mail')?.errors?.required">Это поле обязательно.</small>
+      <small *ngIf="registrationForm.get('e_mail')?.errors?.e_mail">Неверный формат электронной почты.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Пароль:</label>
+    <input id="password" type="password" formControlName="password" />
+    <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched"> 
+      <small *ngIf="registrationForm.get('password')?.errors?.required">Это поле обязательно.</small>
+      <small *ngIf="registrationForm.get('password')?.errors?.minlength">Минимальная длина - 6 символов.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="confirmPassword">Подтверждение пароля:</label>
+    <input id="confirmPassword" type="password" formControlName="confirmPassword" />
+    <div *ngIf="registrationForm.errors?.mismatch && registrationForm.get('confirmPassword')?.touched">
+      <small>Пароли не совпадают.</small>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="registrationForm.invalid">Зарегистрироваться</button>
+  <button type="onReset()">Сбросить</button>
+</form>
+</div>

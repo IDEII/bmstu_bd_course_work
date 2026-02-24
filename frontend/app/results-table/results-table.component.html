@@ -1,0 +1,18 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Раунд выбывания</th>
+        <th>Участник</th>
+        <th>Место</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of results">
+        <td>{{ result.roundNumber }}</td>
+        <td>{{ getParticipantName(result.participant_id) }}</td>
+        <td>{{ result.place }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

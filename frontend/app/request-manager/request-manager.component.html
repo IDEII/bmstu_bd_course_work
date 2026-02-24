@@ -1,0 +1,45 @@
+
+  
+<div>
+  <div class="tournament-management-container">
+    <div class="tournament-selection">
+      <h4>Выберите турнир для просмотра заявок</h4>
+      
+      <div class="select-with-button">
+        <select (click)="onTournamentSelect($event)">
+          <option *ngFor="let tournament of tournaments" [value]="tournament.id">
+            {{ tournament.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedTournament" class="requests-section">
+      <h2>Заявки на участие</h2>
+      <ul>
+        <ng-container *ngFor="let request of requests">
+          <li>
+            <div class="request-item">
+              <p>{{ getFighterName(request.id_fighter) }}</p>
+              <p>{{ request.decision === 1 ? 'accepted' : 'rejected' }}</p>
+              <button (click)="approveRequest(request.request_id)">Одобрить</button>
+              <button (click)="denyRequest(request.request_id)">Отклонить</button>
+            </div>
+          </li>
+        </ng-container>
+      </ul>
+      <p *ngIf="requests.length === 0">Нет заявок для отображения.</p>
+    </div>
+  
+    <div *ngIf="selectedTournament" class="invited-section">
+      <h2>Приглашенные участники</h2>
+      <ul>
+        <li *ngFor="let invitee of InvitedParticipants">
+          <span>{{ getFighterName(invitee.fighter_id) || 'Неизвестный боец' }}</span>
+        </li>
+      </ul>
+      <p *ngIf="InvitedParticipants.length === 0">Никто не приглашён на турнир.</p>
+    </div>
+  </div>
+
+</div>
